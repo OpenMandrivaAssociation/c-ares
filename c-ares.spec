@@ -29,7 +29,7 @@ by Greg Hudson at MIT.
 
 %package -n	%{libdev}
 Summary:	Development files for c-ares
-Group:		Development/Libraries
+Group:		Development/C
 Requires:	%{libname} = %{version}
 Provides:	%{name}-devel = %{version}-%{release}
 
