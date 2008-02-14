@@ -9,6 +9,7 @@ Version:	1.5.1
 Release:	%mkrel 1
 License:	MIT
 Group:		System/Libraries
+BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://daniel.haxx.se/projects/c-ares/
 Source0:	http://daniel.haxx.se/projects/c-ares/c-ares-%{version}.tar.gz
 
