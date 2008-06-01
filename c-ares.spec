@@ -5,7 +5,7 @@
 
 Summary:	A library that performs asynchronous DNS operations
 Name:		c-ares
-Version:	1.5.1
+Version:	1.5.2
 Release:	%mkrel 1
 License:	MIT
 Group:		System/Libraries
@@ -45,13 +45,13 @@ Requires:	%{libdev} = %{version}
 
 %description -n	%{libstat}
 This package contains the static development library for c-ares
-:eeeded to compile applications using c-ares.
+needed to compile applications using c-ares.
 
 %prep
 %setup -q
 
 %build
-%configure	--enable-shared
+%configure2_5x	--enable-shared
 %make
 
 %install
@@ -65,7 +65,7 @@ rm -rf %{buildroot}
 %postun -n %{libname} -p /sbin/ldconfig
 
 %files -n %{libname}
-%{_libdir}/lib*.so.*
+%{_libdir}/lib*.so.%{major}*
 
 %files -n %{libdev}
 %doc README README.cares CHANGES NEWS
@@ -74,6 +74,7 @@ rm -rf %{buildroot}
 %{_includedir}/ares_version.h
 %{_libdir}/lib*.so
 %{_libdir}/lib*.la
+%{_libdir}/pkgconfig/libcares.pc
 %{_mandir}/man3/ares_*
 
 %files -n %{libstat}
