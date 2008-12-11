@@ -5,12 +5,12 @@
 
 Summary:	A library that performs asynchronous DNS operations
 Name:		c-ares
-Version:	1.5.3
+Version:	1.6.0
 Release:	%mkrel 1
 License:	MIT
 Group:		System/Libraries
 URL:		http://c-ares.haxx.se/
-Source0:	http://c-ares.haxx.se/%{name}-%{version}.tar.gz
+Source0:	http://c-ares.haxx.se/%{name}-%{version}.tar.bz2
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
@@ -55,7 +55,10 @@ needed to compile applications using c-ares.
 %configure2_5x	\
 	--enable-shared \
 	--enable-thread \
-	--enable-libgcc
+	--enable-libgcc \
+	--enable-nonblocking \
+	--enable-optimize
+
 %make
 
 %install
