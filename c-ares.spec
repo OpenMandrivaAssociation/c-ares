@@ -80,9 +80,7 @@ rm -rf %{buildroot}
 
 %files -n %{libdevelname}
 %doc README README.cares CHANGES NEWS
-%{_includedir}/ares.h
-%{_includedir}/ares_dns.h
-%{_includedir}/ares_version.h
+%{_includedir}/ares*.h
 %{_libdir}/lib*.so
 %{_libdir}/lib*.la
 %{_libdir}/pkgconfig/libcares.pc
