@@ -5,13 +5,12 @@
 
 Summary:	A library that performs asynchronous DNS operations
 Name:		c-ares
-Version:	1.7.5
-Release:	%mkrel 1
+Version:	1.8.0
+Release:	1
 License:	MIT
 Group:		System/Libraries
 URL:		http://c-ares.haxx.se/
-Source0:	http://c-ares.haxx.se/%{name}-%{version}.tar.bz2
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+Source0:	http://c-ares.haxx.se/download/%{name}-%{version}.tar.gz
 
 %description
 c-ares is a C library that performs DNS requests and name resolves 
@@ -62,18 +61,7 @@ needed to compile applications using c-ares.
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
-
-%clean
-rm -rf %{buildroot}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
 
 %files -n %{libname}
 %{_libdir}/lib*.so.%{major}*
@@ -82,7 +70,6 @@ rm -rf %{buildroot}
 %doc README README.cares CHANGES NEWS
 %{_includedir}/ares*.h
 %{_libdir}/lib*.so
-%{_libdir}/lib*.la
 %{_libdir}/pkgconfig/libcares.pc
 %{_mandir}/man3/ares_*
 
