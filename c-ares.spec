@@ -1,14 +1,14 @@
-%define major 2
+%define major	2
 %define libname %mklibname cares %{major}
-%define libdevelname %mklibname cares -d
+%define devname %mklibname cares -d
 
 Summary:	A library that performs asynchronous DNS operations
 Name:		c-ares
 Version:	1.9.1
-Release:	3
+Release:	4
 License:	MIT
 Group:		System/Libraries
-URL:		http://c-ares.haxx.se/
+Url:		http://c-ares.haxx.se/
 Source0:	http://c-ares.haxx.se/download/%{name}-%{version}.tar.gz
 
 %description
@@ -26,15 +26,13 @@ c-ares is a C library that performs DNS requests and name resolves
 asynchronously. c-ares is a fork of the library named 'ares', written
 by Greg Hudson at MIT.
 
-%package -n %{libdevelname}
+%package -n %{devname}
 Summary:	Development files for c-ares
 Group:		Development/C
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
-Provides:	lib%{name}-devel = %{version}-%{release}
-Obsoletes:	%{mklibname cares -d -s} < %{version}-%{release}
 
-%description -n	%{libdevelname}
+%description -n	%{devname}
 This package contains the header files and developemnt libraries
 needed to compile applications or shared objects that use c-ares.
 
@@ -48,7 +46,7 @@ needed to compile applications or shared objects that use c-ares.
 	--enable-libgcc \
 	--enable-nonblocking \
 	--enable-optimize \
-    --disable-static
+	--disable-static
 
 %make
 
@@ -58,7 +56,7 @@ needed to compile applications or shared objects that use c-ares.
 %files -n %{libname}
 %{_libdir}/lib*.so.%{major}*
 
-%files -n %{libdevelname}
+%files -n %{devname}
 %doc README README.cares CHANGES NEWS
 %{_includedir}/ares*.h
 %{_libdir}/lib*.so
