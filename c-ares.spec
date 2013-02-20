@@ -1,3 +1,5 @@
+%define	debug_package %{nil}
+
 %define major	2
 %define libname %mklibname cares %{major}
 %define devname %mklibname cares -d
