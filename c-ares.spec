@@ -6,8 +6,8 @@
 
 Summary:	A library that performs asynchronous DNS operations
 Name:		c-ares
-Version:	1.9.1
-Release:	4
+Version:	1.10.0
+Release:	1
 License:	MIT
 Group:		System/Libraries
 Url:		http://c-ares.haxx.se/
