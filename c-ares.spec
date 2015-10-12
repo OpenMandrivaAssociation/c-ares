@@ -40,9 +40,10 @@ needed to compile applications or shared objects that use c-ares.
 
 %prep
 %setup -q
-
 %build
-%configure2_5x	\
+export LDFLAGS=`echo %ldflags | sed -e 's/-D_FORTIFY_SOURCE=2//'`
+export CFLAGS=`echo %optflags | sed -e 's/-D_FORTIFY_SOURCE=2//'`
+%configure \
 	--enable-shared \
 	--enable-thread \
 	--enable-libgcc \
