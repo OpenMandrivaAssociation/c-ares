@@ -1,4 +1,2 @@
-removed_sources:
-  c-ares-1.9.1.tar.gz: fe41e47f300bfd587b7f552a141ad3bf85437b0f
 sources:
-  c-ares-1.10.0.tar.gz: e44e6575d5af99cb3a38461486e1ee8b49810eb5
+  c-ares-1.11.0.tar.gz: 8c20b2680099ac73861a780c731edd59e010383a

@@ -6,8 +6,8 @@
 
 Summary:	A library that performs asynchronous DNS operations
 Name:		c-ares
-Version:	1.10.0
-Release:	10
+Version:	1.11.0
+Release:	1
 License:	MIT
 Group:		System/Libraries
 Url:		http://c-ares.haxx.se/
@@ -60,7 +60,7 @@ export CFLAGS=`echo %optflags | sed -e 's/-D_FORTIFY_SOURCE=2//'`
 %{_libdir}/libcares.so.%{major}*
 
 %files -n %{devname}
-%doc README README.cares CHANGES NEWS
+%doc README.cares CHANGES NEWS
 %{_includedir}/ares*.h
 %{_libdir}/lib*.so
 %{_libdir}/pkgconfig/libcares.pc
