@@ -6,7 +6,7 @@
 
 Summary:	A library that performs asynchronous DNS operations
 Name:		c-ares
-Version:	1.16.0
+Version:	1.16.1
 Release:	1
 License:	MIT
 Group:		System/Libraries
@@ -51,10 +51,10 @@ export CFLAGS=`echo %optflags | sed -e 's/-D_FORTIFY_SOURCE=2//'`
 	--enable-optimize \
 	--disable-static
 
-%make
+%make_build
 
 %install
-%makeinstall_std
+%make_install
 
 %files -n %{libname}
 %{_libdir}/libcares.so.%{major}*
@@ -65,4 +65,3 @@ export CFLAGS=`echo %optflags | sed -e 's/-D_FORTIFY_SOURCE=2//'`
 %{_libdir}/lib*.so
 %{_libdir}/pkgconfig/libcares.pc
 %{_mandir}/man3/ares_*
-
