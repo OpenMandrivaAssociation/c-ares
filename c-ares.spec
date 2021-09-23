@@ -1,4 +1,5 @@
-%define	debug_package %{nil}
+# Work around incomplete debug packages
+%global _empty_manifest_terminate_build 0
 
 %define major	2
 %define libname %mklibname cares %{major}
@@ -6,7 +7,7 @@
 
 Summary:	A library that performs asynchronous DNS operations
 Name:		c-ares
-Version:	1.17.1
+Version:	1.17.2
 Release:	1
 License:	MIT
 Group:		System/Libraries
@@ -39,10 +40,11 @@ This package contains the header files and developemnt libraries
 needed to compile applications or shared objects that use c-ares.
 
 %prep
-%setup -q
+%autosetup -p1
+
 %build
-export LDFLAGS=`echo %ldflags | sed -e 's/-D_FORTIFY_SOURCE=2//'`
-export CFLAGS=`echo %optflags | sed -e 's/-D_FORTIFY_SOURCE=2//'`
+export LDFLAGS=$(echo %ldflags | sed -e 's/-D_FORTIFY_SOURCE=2//')
+export CFLAGS=$(echo %optflags | sed -e 's/-D_FORTIFY_SOURCE=2//')
 %configure \
 	--enable-shared \
 	--enable-thread \
@@ -64,4 +66,4 @@ export CFLAGS=`echo %optflags | sed -e 's/-D_FORTIFY_SOURCE=2//'`
 %{_includedir}/ares*.h
 %{_libdir}/lib*.so
 %{_libdir}/pkgconfig/libcares.pc
-%{_mandir}/man3/ares_*
+%doc %{_mandir}/man3/ares_*
