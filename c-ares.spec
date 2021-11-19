@@ -7,7 +7,7 @@
 
 Summary:	A library that performs asynchronous DNS operations
 Name:		c-ares
-Version:	1.17.2
+Version:	1.18.1
 Release:	1
 License:	MIT
 Group:		System/Libraries
