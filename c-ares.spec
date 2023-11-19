@@ -1,14 +1,14 @@
-# Work around incomplete debug packages
-%global _empty_manifest_terminate_build 0
+%undefine _debugsource_packages
 
 %define major	2
-%define libname %mklibname cares %{major}
+%define oldlibname %mklibname cares 2
+%define libname %mklibname cares
 %define devname %mklibname cares -d
 
 Summary:	A library that performs asynchronous DNS operations
 Name:		c-ares
-Version:	1.18.1
-Release:	2
+Version:	1.22.1
+Release:	1
 License:	MIT
 Group:		System/Libraries
 Url:		http://c-ares.haxx.se/
@@ -23,6 +23,7 @@ by Greg Hudson at MIT.
 Summary:	%{summary}
 Group:		%{group}
 Provides:	%{name} = %{version}-%{release}
+%rename %{oldlibname}
 
 %description -n %{libname}
 c-ares is a C library that performs DNS requests and name resolves
