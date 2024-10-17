@@ -11,7 +11,7 @@ Version:	1.22.1
 Release:	1
 License:	MIT
 Group:		System/Libraries
-Url:		http://c-ares.haxx.se/
+Url:		https://c-ares.haxx.se/
 Source0:	http://c-ares.haxx.se/download/%{name}-%{version}.tar.gz
 
 %description
