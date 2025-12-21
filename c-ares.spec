@@ -14,6 +14,11 @@ Group:		System/Libraries
 Url:		https://c-ares.haxx.se/
 Source0:	https://github.com/c-ares/c-ares/releases/download/v%{version}/c-ares-%{version}.tar.gz
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 %description
 c-ares is a C library that performs DNS requests and name resolves 
 asynchronously. c-ares is a fork of the library named 'ares', written 
