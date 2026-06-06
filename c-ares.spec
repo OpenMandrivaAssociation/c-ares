@@ -8,17 +8,15 @@
 Summary:	A library that performs asynchronous DNS operations
 Name:		c-ares
 Version:	1.34.6
-Release:	1
+Release:	2
 License:	MIT
 Group:		System/Libraries
 Url:		https://c-ares.haxx.se/
 Source0:	https://github.com/c-ares/c-ares/releases/download/v%{version}/c-ares-%{version}.tar.gz
 
-BuildRequires:	autoconf
-BuildRequires:	automake
-BuildRequires:	libtool-base
-BuildRequires:	slibtool
-BuildRequires:	make
+BuildSystem:	cmake
+BuildOption:	-DCARES_SYMBOL_HIDING:BOOL=ON
+
 %description
 c-ares is a C library that performs DNS requests and name resolves 
 asynchronously. c-ares is a fork of the library named 'ares', written 
@@ -45,24 +43,11 @@ Provides:	%{name}-devel = %{version}-%{release}
 This package contains the header files and developemnt libraries
 needed to compile applications or shared objects that use c-ares.
 
-%prep
-%autosetup -p1
-
-%build
-export LDFLAGS=$(echo %ldflags | sed -e 's/-D_FORTIFY_SOURCE=2//')
-export CFLAGS=$(echo %optflags | sed -e 's/-D_FORTIFY_SOURCE=2//')
-%configure \
-	--enable-shared \
-	--enable-thread \
-	--enable-libgcc \
-	--enable-nonblocking \
-	--enable-optimize \
-	--disable-static
-
-%make_build
-
-%install
-%make_install
+%files
+%{_bindir}/adig
+%{_bindir}/ahost
+%{_mandir}/man1/adig.1*
+%{_mandir}/man1/ahost.1*
 
 %files -n %{libname}
 %{_libdir}/libcares.so.%{major}*
@@ -71,4 +56,5 @@ export CFLAGS=$(echo %optflags | sed -e 's/-D_FORTIFY_SOURCE=2//')
 %{_includedir}/ares*.h
 %{_libdir}/lib*.so
 %{_libdir}/pkgconfig/libcares.pc
+%{_libdir}/cmake/c-ares
 %doc %{_mandir}/man3/ares_*
