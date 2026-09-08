@@ -47,7 +47,9 @@ needed to compile applications or shared objects that use c-ares.
 # ahost/adig on local names are a useful profile. No network required.
 %pgo
 _bd="$PWD/_OMV_rpm_build"
-export LD_LIBRARY_PATH="$_bd${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+mkdir -p "%{_pgo_profile_dir}"
+export LLVM_PROFILE_FILE="%{_pgo_profile_dir}/c-ares-%m-%p.profraw"
+export LD_LIBRARY_PATH="$_bd${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}:$_bd/lib:$_bd/lib64"
 adig=
 ahost=
 for d in "$_bd" "$_bd/bin" "$_bd/src/tools" "$_bd/src"; do
