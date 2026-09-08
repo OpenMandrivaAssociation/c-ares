@@ -13,6 +13,7 @@ License:	MIT
 Group:		System/Libraries
 Url:		https://c-ares.haxx.se/
 Source0:	https://github.com/c-ares/c-ares/releases/download/v%{version}/c-ares-%{version}.tar.gz
+Source1000:	%{name}.rpmlintrc
 
 BuildSystem:	cmake
 BuildOption:	-DCARES_SYMBOL_HIDING:BOOL=ON
@@ -37,13 +38,6 @@ by Greg Hudson at MIT.
 Summary:	Development files for c-ares
 Group:		Development/C
 Requires:	%{libname} = %{EVRD}
-# devel ships the unversioned .so symlink; rpmlint follows it to the SONAME
-# and wants a library dep, not only the lib package EVR require.
-%if "%{_lib}" == "lib64"
-Requires:	libcares.so.%{major}()(64bit)
-%else
-Requires:	libcares.so.%{major}
-%endif
 Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n	%{devname}
