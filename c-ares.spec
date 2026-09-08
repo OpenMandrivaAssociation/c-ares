@@ -13,7 +13,6 @@ License:	MIT
 Group:		System/Libraries
 Url:		https://c-ares.haxx.se/
 Source0:	https://github.com/c-ares/c-ares/releases/download/v%{version}/c-ares-%{version}.tar.gz
-Source1000:	%{name}.rpmlintrc
 
 BuildSystem:	cmake
 BuildOption:	-DCARES_SYMBOL_HIDING:BOOL=ON
@@ -83,10 +82,13 @@ fi
 
 %files -n %{libname}
 %{_libdir}/libcares.so.%{major}*
+# Keep the unversioned .so with the library. In devel, rpmlint follows the
+# symlink to libcares.so.2 and errors no-library-dependency-for; a filter
+# for that is unused-rpmlintrc-filter (fatal) on the src.rpm.
+%{_libdir}/libcares.so
 
 %files -n %{devname}
 %{_includedir}/ares*.h
-%{_libdir}/lib*.so
 %{_libdir}/pkgconfig/libcares.pc
 %{_libdir}/cmake/c-ares
 %doc %{_mandir}/man3/ares_*
