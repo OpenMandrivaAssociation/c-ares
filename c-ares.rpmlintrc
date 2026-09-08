@@ -1,3 +1,0 @@
-# devel ships the unversioned .so symlink; the SONAME lives in the lib package
-# which devel already Requires. rpmlint follows the symlink and complains.
-addFilter("no-library-dependency-for")
