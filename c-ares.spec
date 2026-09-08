@@ -43,6 +43,35 @@ Provides:	%{name}-devel = %{version}-%{release}
 This package contains the header files and developemnt libraries
 needed to compile applications or shared objects that use c-ares.
 
+# DNS packet parse/build and query state machine have complex branching;
+# ahost/adig on local names are a useful profile. No network required.
+%pgo
+_bd="$PWD/_OMV_rpm_build"
+export LD_LIBRARY_PATH="$_bd${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"
+adig=
+ahost=
+for d in "$_bd" "$_bd/bin" "$_bd/src/tools" "$_bd/src"; do
+	[ -x "$d/adig" ] && adig="$d/adig"
+	[ -x "$ahost" ] || { [ -x "$d/ahost" ] && ahost="$d/ahost"; }
+done
+if [ -z "$adig" ] || [ -z "$ahost" ]; then
+	echo "PGO: instrumented adig/ahost missing under $_bd" >&2
+	find "$_bd" -name adig -o -name ahost 2>/dev/null || true
+	exit 1
+fi
+"$adig" -h >/dev/null 2>&1 || true
+"$ahost" -h >/dev/null 2>&1 || true
+for n in localhost localhost.localdomain $(hostname) 127.0.0.1 ::1; do
+	"$ahost" "$n" >/dev/null 2>&1 || true
+	"$adig" "$n" >/dev/null 2>&1 || true
+	"$adig" A "$n" >/dev/null 2>&1 || true
+	"$adig" AAAA "$n" >/dev/null 2>&1 || true
+	"$adig" PTR 1.0.0.127.in-addr.arpa >/dev/null 2>&1 || true
+done
+if [ -r /etc/hosts ]; then
+	"$ahost" -f /etc/hosts localhost >/dev/null 2>&1 || true
+fi
+
 %files
 %{_bindir}/adig
 %{_bindir}/ahost
