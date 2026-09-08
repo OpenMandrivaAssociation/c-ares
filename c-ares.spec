@@ -74,6 +74,12 @@ if [ -r /etc/hosts ]; then
 	"$ahost" -f /etc/hosts localhost >/dev/null 2>&1 || true
 fi
 
+# Replace the unversioned .so symlink with a linker script so rpmlint does
+# not treat devel as shipping libcares.so.2 (no-library-dependency-for).
+%install -a
+rm -f %{buildroot}%{_libdir}/libcares.so
+printf 'INPUT(libcares.so.%s)\n' %{major} > %{buildroot}%{_libdir}/libcares.so
+
 %files
 %{_bindir}/adig
 %{_bindir}/ahost
@@ -82,13 +88,10 @@ fi
 
 %files -n %{libname}
 %{_libdir}/libcares.so.%{major}*
-# Keep the unversioned .so with the library. In devel, rpmlint follows the
-# symlink to libcares.so.2 and errors no-library-dependency-for; a filter
-# for that is unused-rpmlintrc-filter (fatal) on the src.rpm.
-%{_libdir}/libcares.so
 
 %files -n %{devname}
 %{_includedir}/ares*.h
+%{_libdir}/libcares.so
 %{_libdir}/pkgconfig/libcares.pc
 %{_libdir}/cmake/c-ares
 %doc %{_mandir}/man3/ares_*
