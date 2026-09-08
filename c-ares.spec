@@ -37,6 +37,13 @@ by Greg Hudson at MIT.
 Summary:	Development files for c-ares
 Group:		Development/C
 Requires:	%{libname} = %{EVRD}
+# devel ships the unversioned .so symlink; rpmlint follows it to the SONAME
+# and wants a library dep, not only the lib package EVR require.
+%if "%{_lib}" == "lib64"
+Requires:	libcares.so.%{major}()(64bit)
+%else
+Requires:	libcares.so.%{major}
+%endif
 Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n	%{devname}
