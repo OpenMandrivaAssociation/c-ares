@@ -13,6 +13,7 @@ License:	MIT
 Group:		System/Libraries
 Url:		https://c-ares.haxx.se/
 Source0:	https://github.com/c-ares/c-ares/releases/download/v%{version}/c-ares-%{version}.tar.gz
+Source1000:	%{name}.rpmlintrc
 
 BuildSystem:	cmake
 BuildOption:	-DCARES_SYMBOL_HIDING:BOOL=ON
@@ -36,7 +37,7 @@ by Greg Hudson at MIT.
 %package -n %{devname}
 Summary:	Development files for c-ares
 Group:		Development/C
-Requires:	%{libname} = %{version}-%{release}
+Requires:	%{libname} = %{EVRD}
 Provides:	%{name}-devel = %{version}-%{release}
 
 %description -n	%{devname}
